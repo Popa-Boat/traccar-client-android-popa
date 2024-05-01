@@ -2,7 +2,10 @@
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
+    <item
+        android:id="@+id/battery"
+        android:title="Battery"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/status"
         android:title="@string/menu_status"
@@ -12,5 +15,6 @@
         android:id="@+id/info"
         android:title="@string/menu_info"
         app:showAsAction="ifRoom" />
+
 
 </menu>

@@ -178,7 +178,6 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
         inflater.inflate(R.menu.main, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.status) {
             startActivity(Intent(activity, StatusActivity::class.java))
@@ -187,8 +186,13 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
             DokiActivity.start(requireContext())
             return true
         }
+        else if (item.itemId == R.id.battery) {
+            startActivity(Intent(activity, BluetoothActivity::class.java))
+            return true
+        }
         return super.onOptionsItemSelected(item)
     }
+
 
     private fun initPreferences() {
         PreferenceManager.setDefaultValues(requireActivity(), R.xml.preferences, false)
