@@ -69,7 +69,7 @@ abstract class PositionProvider(
             val status = batteryIntent.getIntExtra(BatteryManager.EXTRA_STATUS, -1)
             return BatteryStatus(
                 level = level * 100.0 / scale,
-                charging = status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL,
+                charging = statusq == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL,
             )
         }
         return BatteryStatus()
