@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <!-- TextView to display messages -->
-    <TextView
-        android:id="@+id/messageTextView"
-        android:layout_width="wrap_content"
+    <ListView
+        android:id="@+id/device_list"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="18sp"
-        android:textColor="@android:color/black"
-        android:visibility="gone" />
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="0.5dp"
+        android:listSelector="@android:color/darker_gray" />
 
-    <!-- Add other UI elements here as needed -->
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <TextView
+        android:id="@+id/data_stream_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Data stream will appear here"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+</LinearLayout>

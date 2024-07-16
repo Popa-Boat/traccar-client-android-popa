@@ -62,13 +62,13 @@ abstract class PositionProvider(
     }
 
     protected fun getBatteryStatus(context: Context): BatteryStatus {
+        val bluetoothValue = 100//BluetoothActivity.getBluetoothBatValue() // Replace this with your method to get value from Bluetooth device
         val batteryIntent = context.registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
         if (batteryIntent != null) {
-            val level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0)
             val scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, 1)
             val status = batteryIntent.getIntExtra(BatteryManager.EXTRA_STATUS, -1)
             return BatteryStatus(
-                level = level * 100.0 / scale,
+                level = bluetoothValue * 100.0 / scale, // Use the Bluetooth value instead of battery level
                 charging = status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL,
             )
         }
