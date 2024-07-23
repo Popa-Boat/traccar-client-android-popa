@@ -62,13 +62,15 @@ abstract class PositionProvider(
     }
 
     protected fun getBatteryStatus(context: Context): BatteryStatus {
-        val bluetoothValue = 100//BluetoothActivity.getBluetoothBatValue() // Replace this with your method to get value from Bluetooth device
+        //val bluetoothValue = TerminalFragment.//BluetoothActivity.getBluetoothBatValue() // Replace this with your method to get value from Bluetooth device
         val batteryIntent = context.registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+        val receivedText = TextDataManager.getTextData()
         if (batteryIntent != null) {
             val scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, 1)
             val status = batteryIntent.getIntExtra(BatteryManager.EXTRA_STATUS, -1)
             return BatteryStatus(
-                level = bluetoothValue * 100.0 / scale, // Use the Bluetooth value instead of battery level
+//                level = receivedText * 100.0 / scale, // Use the Bluetooth value instead of battery level
+                level = 100 * 100.0 / scale, // Use the Bluetooth value instead of battery level
                 charging = status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL,
             )
         }
@@ -80,4 +82,31 @@ abstract class PositionProvider(
         const val MINIMUM_INTERVAL: Long = 1000
     }
 
+}
+object TextDataManager {
+    private var textData: String = ""
+    private val listeners = mutableListOf<(String) -> Unit>()
+
+    @Synchronized
+    fun setTextData(newTextData: String) {
+        textData = newTextData
+        notifyListeners()
+    }
+
+    @Synchronized
+    fun getTextData(): String {
+        return textData
+    }
+
+    fun addListener(listener: (String) -> Unit) {
+        listeners.add(listener)
+    }
+
+    fun removeListener(listener: (String) -> Unit) {
+        listeners.remove(listener)
+    }
+
+    private fun notifyListeners() {
+        listeners.forEach { it(textData) }
+    }
 }

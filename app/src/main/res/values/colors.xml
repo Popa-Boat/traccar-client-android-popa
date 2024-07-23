@@ -4,5 +4,12 @@
     <color name="primary">#2e7d32</color>
     <color name="primary_dark">#005005</color>
     <color name="accent">#1a237e</color>
+    <color name="colorPrimary">#d84315</color>
+    <color name="colorPrimaryDark">#bf360c</color>
+    <color name="colorAccent">#ff6e40</color>
+
+    <color name="colorRecieveText">#00FF00</color>
+    <color name="colorSendText">#82CAFF</color>
+    <color name="colorStatusText">#FFDB58</color>
 
 </resources>

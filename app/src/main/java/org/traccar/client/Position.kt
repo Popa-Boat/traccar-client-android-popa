@@ -48,7 +48,7 @@ data class Position(
         } else {
             0.0
         },
-        battery = battery.level,
+        battery =GlobalData.requiredBytes.toDouble(),//battery.level,
         charging = battery.charging,
         mock = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             location.isMock

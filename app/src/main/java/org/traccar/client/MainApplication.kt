@@ -32,6 +32,7 @@ open class MainApplication : MultiDexApplication() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             registerChannel()
         }
+
     }
 
     @TargetApi(Build.VERSION_CODES.O)

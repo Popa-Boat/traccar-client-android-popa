@@ -187,7 +187,7 @@ class MainFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeListene
             return true
         }
         else if (item.itemId == R.id.battery) {
-            startActivity(Intent(activity, BluetoothActivity::class.java))
+            startActivity(Intent(activity, Bluetooth_Main_Activity::class.java))
             return true
         }
         return super.onOptionsItemSelected(item)

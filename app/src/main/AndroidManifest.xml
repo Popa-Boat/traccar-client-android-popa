@@ -15,6 +15,9 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_REMOTE_MESSAGING" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
     <uses-permission android:name="oppo.permission.OPPO_COMPONENT_SAFE" />
     <uses-permission android:name="com.huawei.permission.external_app_settings.USE_COMPONENT" />
 
@@ -26,6 +29,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
     <application
         android:allowBackup="true"
         android:networkSecurityConfig="@xml/network_security_config"
@@ -33,7 +37,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         android:name=".MainApplication"
-        tools:ignore="GoogleAppIndexingWarning,UnusedAttribute">
+        tools:ignore="GoogleAppIndexingWarning,UnusedAttribute,AllowBackup">
 
         <meta-data
             android:name="google_analytics_adid_collection_enabled"
@@ -61,13 +65,17 @@
             android:name=".StatusActivity"
             android:exported="false" />
 
-        <activity android:name=".BluetoothActivity"
+        <activity android:name=".Bluetooth_Main_Activity"
+            android:windowSoftInputMode="stateHidden|adjustResize"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
+
+        <service
+            android:name=".SerialService"
+            android:foregroundServiceType="remoteMessaging|connectedDevice" />
+
+        <service android:name=".BluetoothTimedConnection" />
+
         <activity
             android:name=".ShortcutActivity"
             android:exported="true"
