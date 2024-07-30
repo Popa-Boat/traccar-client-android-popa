@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -14,7 +13,6 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
-
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_REMOTE_MESSAGING" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
@@ -28,16 +26,19 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
+        android:name=".MainApplication"
         android:allowBackup="true"
-        android:networkSecurityConfig="@xml/network_security_config"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/AppTheme"
-        android:name=".MainApplication"
         tools:ignore="GoogleAppIndexingWarning,UnusedAttribute,AllowBackup">
+        <service
+            android:name=".BluetoothTimedService"
+            android:enabled="true"
+            android:exported="true"></service>
 
         <meta-data
             android:name="google_analytics_adid_collection_enabled"
@@ -54,8 +55,10 @@
             android:targetActivity=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
@@ -64,17 +67,14 @@
         <activity
             android:name=".StatusActivity"
             android:exported="false" />
-
-        <activity android:name=".Bluetooth_Main_Activity"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-            android:exported="true">
-        </activity>
+        <activity
+            android:name=".Bluetooth_Main_Activity"
+            android:exported="true"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <service
             android:name=".SerialService"
             android:foregroundServiceType="remoteMessaging|connectedDevice" />
-
-        <service android:name=".BluetoothTimedConnection" />
 
         <activity
             android:name=".ShortcutActivity"
@@ -103,21 +103,20 @@
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>
         </receiver>
-
         <receiver
             android:name=".StatusWidget"
-            android:label="@string/widget_label"
-            android:exported="true">
+            android:exported="true"
+            android:label="@string/widget_label">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="org.traccar.action.SERVICE_STARTED" />
                 <action android:name="org.traccar.action.SERVICE_STOPPED" />
             </intent-filter>
+
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/status_widget_info" />
         </receiver>
-
     </application>
 
 </manifest>

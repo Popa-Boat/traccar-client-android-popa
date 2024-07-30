@@ -30,8 +30,8 @@ class MainActivity : AppCompatActivity() {
 
         if (lastDeviceAddress != null) {
             BluetoothDeviceManager.setLastDeviceAddress(lastDeviceAddress)
-            startService(Intent(this, BluetoothTimedConnection::class.java))
         }
+        startService(Intent(this, BluetoothTimedService::class.java))
 
     }
 
