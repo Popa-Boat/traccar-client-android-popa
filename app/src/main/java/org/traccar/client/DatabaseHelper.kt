@@ -67,7 +67,9 @@ class DatabaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
                     "accuracy REAL," +
                     "battery REAL," +
                     "charging INTEGER," +
-                    "mock INTEGER)"
+                    "mock INTEGER)"//+
+//                    "boatBattery INTEGER,"+
+//                    "boatCharging INTEGER)"
         )
     }
 
@@ -94,6 +96,8 @@ class DatabaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
         values.put("battery", position.battery)
         values.put("charging", if (position.charging) 1 else 0)
         values.put("mock", if (position.mock) 1 else 0)
+//        values.put("boatBattery", position.boatBattery.toInt())
+//        values.put("boatCharging", if (position.boatCharging) 1 else 0)
         db.insertOrThrow("position", null, values)
     }
 
@@ -123,6 +127,8 @@ class DatabaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
                     battery = cursor.getDouble(cursor.getColumnIndex("battery")),
                     charging = cursor.getInt(cursor.getColumnIndex("charging")) > 0,
                     mock = cursor.getInt(cursor.getColumnIndex("mock")) > 0,
+//                    boatBattery = cursor.getInt(cursor.getColumnIndex("boatBattery")).toByte(),
+//                    boatCharging = cursor.getInt(cursor.getColumnIndex("boatCharging")) > 0,
                 )
             }
         }

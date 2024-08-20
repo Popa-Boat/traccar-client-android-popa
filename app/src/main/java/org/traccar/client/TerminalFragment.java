@@ -131,9 +131,6 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         receiveText = view.findViewById(R.id.receive_text);                          // TextView performance decreases with number of spans
         receiveText.setTextColor(getResources().getColor(R.color.colorRecieveText)); // set as default color to reduce number of spans
         receiveText.setMovementMethod(ScrollingMovementMethod.getInstance());
-
-        TextDataManager.INSTANCE.setTextData(receiveText.getText().toString());
-
         sendText = view.findViewById(R.id.send_text);
         hexWatcher = new TextUtil.HexWatcher(sendText);
         hexWatcher.enable(hexEnabled);

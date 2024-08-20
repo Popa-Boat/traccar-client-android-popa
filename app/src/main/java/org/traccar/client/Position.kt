@@ -18,7 +18,8 @@ package org.traccar.client
 import android.location.Location
 import android.location.LocationManager
 import android.os.Build
-import java.util.*
+import android.util.Log
+import java.util.Date
 
 data class Position(
     val id: Long = 0,
@@ -33,8 +34,12 @@ data class Position(
     val battery: Double = 0.0,
     val charging: Boolean = false,
     val mock: Boolean = false,
+//    val boatBattery: Byte = 0,
+//    val boatCharging: Boolean = false,
 ) {
-
+    companion object {
+        private const val TAG = "ExampleClass"
+    }
     constructor(deviceId: String, location: Location, battery: BatteryStatus) : this(
         deviceId = deviceId,
         time = Date(location.time.correctRollover()),
@@ -43,12 +48,24 @@ data class Position(
         altitude = location.altitude,
         speed = location.speed * 1.943844, // speed in knots
         course = location.bearing.toDouble(),
-        accuracy = if (location.provider != null && location.provider != LocationManager.GPS_PROVIDER) {
-            location.accuracy.toDouble()
+          accuracy = if (location.provider != null) {
+            if (location.provider != LocationManager.GPS_PROVIDER) {
+                location.accuracy.toDouble().also {
+//                    Log.d(TAG, "Non-GPS provider accuracy: $it")
+                }
+            } else {
+                location.accuracy.toDouble().also {
+//                    Log.d(TAG, "GPS provider accuracy: $it")
+                }
+            }
         } else {
-            0.0
+            0.0.also {
+//                Log.d(TAG, "Provider is null")
+            }
         },
-        battery =GlobalData.requiredBytes.toDouble()/100,//battery.level,
+//        boatBattery = GlobalData.requiredByte,
+//        boatCharging = false,  
+        battery = GlobalData.requiredByte.toDouble(),//battery.level,
         charging = battery.charging,
         mock = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             location.isMock

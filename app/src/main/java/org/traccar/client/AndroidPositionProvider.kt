@@ -32,7 +32,7 @@ class AndroidPositionProvider(context: Context, listener: PositionListener) : Po
     override fun startUpdates() {
         try {
             locationManager.requestLocationUpdates(
-                    provider, if (distance > 0 || angle > 0) MINIMUM_INTERVAL else interval, 0f, this)
+                provider, if (distance > 0 || angle > 0) MINIMUM_INTERVAL else interval, 0f, this)
         } catch (e: RuntimeException) {
             listener.onPositionError(e)
         }
